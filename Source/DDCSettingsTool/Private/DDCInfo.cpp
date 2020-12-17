@@ -40,8 +40,7 @@ FString UDDCInfo::SaveForIniString() const
 	auto BoolAlpha = [](bool bInVal) { return (bInVal ? TEXT("true") : TEXT("false")); };
 	FString FormattedString;
 	{
-		FormattedString += GetName();
-		FormattedString += TEXT("=(Type=FileSystem");
+		FormattedString += TEXT("(Type=FileSystem");
 		
 		FormattedString += FString::Printf(TEXT(", Path=%s"), *Path.Path);
 		FormattedString += FString::Printf(TEXT(", EnvPathOverride=%s"), *EnvPathOverride);

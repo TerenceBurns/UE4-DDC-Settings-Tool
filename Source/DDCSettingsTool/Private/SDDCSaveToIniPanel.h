@@ -21,7 +21,7 @@ public:
 	SLATE_END_ARGS();
 
 	void Construct(const FArguments& InArgs, TWeakObjectPtr<UDDCInfo> InLocalDdcObj, TWeakObjectPtr<UDDCInfo> InSharedDdcObj);
-	virtual ~SDDCSaveToIniPanel() {}
+	virtual ~SDDCSaveToIniPanel();
 
 public:
 
@@ -31,7 +31,19 @@ public:
 	
 	FText GetSelectedIniFileNameText() const;
 	// End selected config file functionality (Drop down)
+
+private:
+	//
+	void SaveSettingsToIni() const;
+
+	//
 	void GatherIniFilePaths();
+
+	//
+	void OnObjPropertyChanged(UObject* ObjectBeingModified, FPropertyChangedEvent& PropertyChangedEvent);
+
+	//
+	bool IsSaveEnabled() const;
 	
 private:
 	//
@@ -48,4 +60,10 @@ private:
 
 	//
 	TArray<TSharedPtr<FString>> AvailableIniPaths;
+
+	//
+	FDelegateHandle OnObjChangedDelegateHandle;
+	
+	//
+	bool bIsSaveEnabled;
 };

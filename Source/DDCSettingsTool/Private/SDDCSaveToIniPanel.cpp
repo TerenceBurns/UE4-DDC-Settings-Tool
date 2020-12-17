@@ -4,7 +4,7 @@
 #include "DDCInfo.h"
 #include "DerivedDataCacheInterface.h"
 #include "Widgets/Input/SComboBox.h"
-
+#include "Misc/FileHelper.h"
 
 #define LOCTEXT_NAMESPACE "FDDCSettingsToolModule"
 
@@ -29,6 +29,10 @@ void SDDCSaveToIniPanel::Construct(const FArguments& InArgs, TWeakObjectPtr<UDDC
 	SharedDdcObj = InSharedDdcObj;
 
 	GatherIniFilePaths();
+
+	OnObjChangedDelegateHandle = FCoreUObjectDelegates::OnObjectPropertyChanged.AddRaw(this, &SDDCSaveToIniPanel::OnObjPropertyChanged);
+	bIsSaveEnabled = false;
+
 
 	FDerivedDataCacheInterface* DDC = GetDerivedDataCache();
 	ChildSlot
@@ -113,8 +117,11 @@ void SDDCSaveToIniPanel::Construct(const FArguments& InArgs, TWeakObjectPtr<UDDC
 										SNew(SButton)
 										.Text(LOCTEXT("SaveButtonLabel", "Save"))
 										.ToolTipText(LOCTEXT("SaveButton_Tooltip", "Save changes to the specified config file."))
+//										.IsEnabled(TAttribute<bool>(this, &SDDCSaveToIniPanel::IsSaveEnabled)) // Maybe do later...?
 										.OnClicked_Lambda([this]()
 										{
+											this->SaveSettingsToIni();
+											bIsSaveEnabled = false;
 											return(FReply::Handled());
 										})
 									]
@@ -126,6 +133,12 @@ void SDDCSaveToIniPanel::Construct(const FArguments& InArgs, TWeakObjectPtr<UDDC
 			]
 		]
 	];
+}
+
+
+SDDCSaveToIniPanel::~SDDCSaveToIniPanel()
+{
+	FCoreUObjectDelegates::OnObjectPropertyChanged.Remove(OnObjChangedDelegateHandle);
 }
 
 
@@ -149,6 +162,33 @@ void SDDCSaveToIniPanel::GatherIniFilePaths()
 }
 
 
+void SDDCSaveToIniPanel::SaveSettingsToIni() const
+{
+	IFileManager& FileManager = IFileManager::Get();
+	if (!FileManager.FileExists(**SelectedIniPath))
+	{
+		// Ensure we can write the ini file to the location.
+		FString WriteDir = FPaths::GetPath(*SelectedIniPath);
+		if (FileManager.MakeDirectory(*WriteDir, true))
+		{
+			FFileHelper::SaveStringToFile(TEXT(""), **SelectedIniPath);
+		}
+	}
+
+	GConfig->LoadFile(*SelectedIniPath);
+	FDerivedDataCacheInterface* DDC = GetDerivedDataCache();
+	if (FConfigSection* Sec = GConfig->GetSectionPrivate(DDC->GetGraphName(), true, false, *SelectedIniPath))
+	{
+		Sec->Remove(TEXT("Local"));
+		Sec->Remove(TEXT("Shared"));
+		Sec->Add(TEXT("Local"), *LocalDdcObj->SaveForIniString());
+		if (SharedDdcObj != nullptr)
+			Sec->Add(TEXT("Shared"), *SharedDdcObj->SaveForIniString());
+	}
+	GConfig->Flush(false, *SelectedIniPath);	
+}
+
+
 TSharedRef<SWidget> SDDCSaveToIniPanel::GenerateIniFileComboBoxWidget(TSharedPtr<FString> InItem)
 {
 	return
@@ -162,6 +202,7 @@ TSharedRef<SWidget> SDDCSaveToIniPanel::GenerateIniFileComboBoxWidget(TSharedPtr
 		];
 }
 
+
 void SDDCSaveToIniPanel::HandleIniFileSelectionChanged(TSharedPtr<FString> InSelection, ESelectInfo::Type SelectInfo)
 {
 	if (InSelection.IsValid())
@@ -170,9 +211,25 @@ void SDDCSaveToIniPanel::HandleIniFileSelectionChanged(TSharedPtr<FString> InSel
 	}
 }
 
+
 FText SDDCSaveToIniPanel::GetSelectedIniFileNameText() const
 {
 	return FText::FromString(*this->SelectedIniPath);
+}
+
+
+void SDDCSaveToIniPanel::OnObjPropertyChanged(UObject* ObjectBeingModified, FPropertyChangedEvent& PropertyChangedEvent)
+{
+	if (ObjectBeingModified == LocalDdcObj || ObjectBeingModified == LocalDdcObj)
+	{
+		bIsSaveEnabled = true;
+	}
+}
+
+
+bool SDDCSaveToIniPanel::IsSaveEnabled() const
+{
+	return bIsSaveEnabled;
 }
 
 #pragma optimize("", on)

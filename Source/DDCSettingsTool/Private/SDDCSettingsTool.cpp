@@ -32,13 +32,13 @@ void SDDCSettingsTool::Construct(const FArguments& InArgs)
 	{
 		if (const FConfigValue* LocalValue = DdcSection->Find(DDCSettingsToolViewConstants::LocalKeyName))
 		{
-			LocalDDCInfo->LoadFromIniString(LocalValue->GetValue());
+			LocalDDCInfo->LoadFromIniString(LocalValue->GetSavedValue());
 		}
 
 		if (const FConfigValue* SharedValue = DdcSection->Find(DDCSettingsToolViewConstants::SharedKeyName))
 		{
 			SharedDDCInfo = NewObject<UDDCInfo>(GetTransientPackage(), UDDCInfo::StaticClass(), DDCSettingsToolViewConstants::SharedKeyName);
-			SharedDDCInfo->LoadFromIniString(SharedValue->GetValue());
+			SharedDDCInfo->LoadFromIniString(SharedValue->GetSavedValue());
 		}
 	}
 
