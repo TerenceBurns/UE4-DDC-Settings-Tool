@@ -39,6 +39,7 @@ FName FDDCSettingsToolStyle::GetStyleSetName()
 #define BORDER_BRUSH( RelativePath, ... ) FSlateBorderBrush( Style->RootToContentDir( RelativePath, TEXT(".png") ), __VA_ARGS__ )
 #define TTF_FONT( RelativePath, ... ) FSlateFontInfo( Style->RootToContentDir( RelativePath, TEXT(".ttf") ), __VA_ARGS__ )
 #define OTF_FONT( RelativePath, ... ) FSlateFontInfo( Style->RootToContentDir( RelativePath, TEXT(".otf") ), __VA_ARGS__ )
+#define DEFAULT_FONT(...) FCoreStyle::GetDefaultFontStyle(__VA_ARGS__)
 
 const FVector2D Icon16x16(16.0f, 16.0f);
 const FVector2D Icon20x20(20.0f, 20.0f);
@@ -51,6 +52,7 @@ TSharedRef< FSlateStyleSet > FDDCSettingsToolStyle::Create()
 	Style->SetContentRoot(IPluginManager::Get().FindPlugin("DDCSettingsTool")->GetBaseDir() / TEXT("Resources"));
 
 	Style->Set("DDCSettingsTool.OpenPluginWindow", new IMAGE_BRUSH(TEXT("icons8-shared-folder-50"), Icon40x40));
+	Style->Set("DDCEditor.LabelFont", DEFAULT_FONT("Bold", 14));
 
 	return Style;
 }

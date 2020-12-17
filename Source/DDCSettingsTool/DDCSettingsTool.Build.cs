@@ -44,8 +44,9 @@ public class DDCSettingsTool : ModuleRules
                 "SlateCore",
 				// ... add private dependencies that you statically link with here ...	
                 "EditorStyle",
-				"DerivedDataCache"
-            }
+				"DerivedDataCache",
+				"PropertyEditor",
+			}
 			);
 		
 		

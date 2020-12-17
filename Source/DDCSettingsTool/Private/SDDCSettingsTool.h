@@ -8,6 +8,7 @@
 #include "Widgets/SCompoundWidget.h"
 
 #include "SDDCInfoPanel.h"
+#include "SDDCSaveToIniPanel.h"
 
 /**
  * Slate widget to allow users to edit which Plugins are enabled for this project.
@@ -28,14 +29,13 @@ public:
 	/** Destructor */
 	virtual ~SDDCSettingsTool();
 
-// Begin SWidget interface
-	virtual void Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime) override;
-// End SWidget interface
-
 private:
 	//
 	TSharedPtr<SDDCInfoPanel> LocalDDCInfoWidget;
 
 	//
 	TSharedPtr<SDDCInfoPanel> SharedDDCInfoWidget;
+
+	//
+	TSharedPtr<SDDCSaveToIniPanel> SaveToIniWidget;
 };

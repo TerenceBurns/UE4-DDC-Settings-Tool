@@ -9,7 +9,7 @@
 
 #include "Widgets/Views/SHeaderRow.h"
 
-#include "DDCData.h"
+#include "DDCInfo.h"
 
 
 /**
@@ -22,9 +22,13 @@ public:
 	SLATE_BEGIN_ARGS(SDDCInfoPanel) {}
 	SLATE_END_ARGS();
 
-	void Construct(const FArguments& InArgs, FDDCData&& InCacheInformation);
+	void Construct(const FArguments& InArgs, const FName& InCacheName, TWeakObjectPtr<UDDCInfo> InCacheInformation);
 	virtual ~SDDCInfoPanel() {}
 
 private:
-	FDDCData CacheInformation;
+	//
+	TSharedPtr<class IDetailsView> MainPropertyView;
+
+	//
+	TWeakObjectPtr<UDDCInfo> CacheInformation;
 };

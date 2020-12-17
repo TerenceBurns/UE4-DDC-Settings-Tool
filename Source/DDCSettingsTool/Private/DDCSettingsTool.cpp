@@ -77,7 +77,7 @@ TSharedRef<SDockTab> FDDCSettingsToolModule::OnSpawnPluginTab(const FSpawnTabArg
 
 void FDDCSettingsToolModule::PluginButtonClicked()
 {
-	FGlobalTabmanager::Get()->InvokeTab(DDCSettingsToolTabName);
+	FGlobalTabmanager::Get()->TryInvokeTab(DDCSettingsToolTabName);
 }
 
 
