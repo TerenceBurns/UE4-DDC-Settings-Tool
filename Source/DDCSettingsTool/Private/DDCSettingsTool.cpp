@@ -1,12 +1,13 @@
 // Copyright 2020 - Trifolium Digital Limited
 
 #include "DDCSettingsTool.h"
+
 #include "DDCSettingsToolStyle.h"
 #include "DDCSettingsToolCommands.h"
+#include "SDDCSettingsTool.h"
 #include "LevelEditor.h"
 #include "Widgets/Docking/SDockTab.h"
 #include "Widgets/Layout/SBox.h"
-#include "SDDCSettingsTool.h"
 
 static const FName DDCSettingsToolTabName("DDCSettingsTool");
 

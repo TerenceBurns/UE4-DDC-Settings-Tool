@@ -1,7 +1,9 @@
 // Copyright 2020 - Trifolium Digital Limited
 
 #include "SDDCSettingsTool.h"
+
 #include "DerivedDataCacheInterface.h"
+
 
 #define LOCTEXT_NAMESPACE "FDDCSettingsToolModule"
 
@@ -18,8 +20,6 @@ namespace DDCSettingsToolViewConstants
 ///////////////////////////////////////////////////////////////////////
 // SDDCSettingsTool
 
-
-#pragma optimize("", off)
 
 void SDDCSettingsTool::Construct(const FArguments& InArgs)
 {
@@ -68,7 +68,6 @@ void SDDCSettingsTool::Construct(const FArguments& InArgs)
 	];
 }
 
-#pragma optimize("", on)
 
 SDDCSettingsTool::~SDDCSettingsTool()
 {

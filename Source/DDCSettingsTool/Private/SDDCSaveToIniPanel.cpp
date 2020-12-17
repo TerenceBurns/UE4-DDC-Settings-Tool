@@ -1,10 +1,12 @@
 // Copyright 2020 - Trifolium Digital Limited
 
 #include "SDDCSaveToIniPanel.h"
-#include "DDCInfo.h"
+
 #include "DerivedDataCacheInterface.h"
 #include "Widgets/Input/SComboBox.h"
 #include "Misc/FileHelper.h"
+#include "DDCInfo.h"
+
 
 #define LOCTEXT_NAMESPACE "FDDCSettingsToolModule"
 
@@ -20,8 +22,6 @@ namespace DDCSaveToIniPanelViewConstants
 ///////////////////////////////////////////////////////////////////////
 // SDDCInfoPanel
 
-
-#pragma optimize("", off)
 
 void SDDCSaveToIniPanel::Construct(const FArguments& InArgs, TWeakObjectPtr<UDDCInfo> InLocalDdcObj, TWeakObjectPtr<UDDCInfo> InSharedDdcObj)
 {
@@ -93,7 +93,6 @@ void SDDCSaveToIniPanel::Construct(const FArguments& InArgs, TWeakObjectPtr<UDDC
 								]
 								+ SVerticalBox::Slot()
 								.AutoHeight()
-//								.Padding(4.0f, 0.0f, 4.0f, 4.0f)
 								.Padding(8.0f)
 								[
 									SNew(SHorizontalBox)
@@ -232,6 +231,5 @@ bool SDDCSaveToIniPanel::IsSaveEnabled() const
 	return bIsSaveEnabled;
 }
 
-#pragma optimize("", on)
 
 #undef LOCTEXT_NAMESPACE

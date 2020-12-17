@@ -5,12 +5,11 @@
 #include "CoreMinimal.h"
 #include "Runtime/Launch/Resources/Version.h"
 
-
 #include "DDCInfo.generated.h"
 
 
 /**
- *
+ * Object which is used in a details view to edit DDC settings for the given cache.
  */
 UCLASS(transient)
 class UDDCInfo : public UObject
@@ -18,7 +17,8 @@ class UDDCInfo : public UObject
 GENERATED_BODY()
 
 public:
-	
+
+	/** Serialisation of data to and from an ini file. */
 	void LoadFromIniString(const FString& IniString);
 	FString SaveForIniString() const;
 	
@@ -67,6 +67,7 @@ public:
 	int32 FoldersToClean;
 
 //#if ENGINE_MINOR_VERSION >= 26
+
 	// 4.26+ If the path does not exist a warning prompt will be shown.This is useful for shared DDCs where the mount may have dropped
 	UPROPERTY(EditAnywhere, Category = FileSystemInformation, meta = (NoResetToDefault))
 	bool bPromptIfMissing = false;
@@ -74,6 +75,7 @@ public:
 	// 4.26+ If access times are < this value in ms then some operations will be disabled to improve performance.
 	UPROPERTY(EditAnywhere, Category = FileSystemInformation, meta = (NoResetToDefault))
 	float ConsiderSlowAtMS = 50.0f;
+
 //#endif // ENGINE_MINOR_VERSION >= 26
 
 	// How many files to check a second.

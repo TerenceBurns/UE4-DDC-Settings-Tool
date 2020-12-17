@@ -2,20 +2,10 @@
 
 #include "DDCInfo.h"
 
-/*
-UDDCInfo::UDDCInfo(const FString& InCacheName)
-	: CacheName(InCacheName)
-{}
-*/
 
 void UDDCInfo::LoadFromIniString(const FString& IniString)
 {
 	FParse::Value(*IniString, TEXT("Path="), Path.Path);
-//	if (Path.StartsWith(TEXT("?"))) // Taken from Epic.
-//	{
-//		Path.Path = TEXT("");
-//	}
-
 	FParse::Value(*IniString, TEXT("EnvPathOverride="), EnvPathOverride);
 	FParse::Value(*IniString, TEXT("CommandLineOverride="), CommandlineOverride);
 	FParse::Value(*IniString, TEXT("EditorOverrideSetting="), EditorOverrideSetting);
@@ -55,7 +45,7 @@ FString UDDCInfo::SaveForIniString() const
 		FormattedString += FString::Printf(TEXT(", FoldersToClean=%d"), FoldersToClean);
 		FormattedString += FString::Printf(TEXT(", MaxFileChecksPerSec=%d"), MaxFileChecksPerSec);
 
-		#if ENGINE_MINOR_VERSION >= 26
+#if ENGINE_MINOR_VERSION >= 26
 		FormattedString += FString::Printf(TEXT(", ConsiderSlowAt=%.2f"), ConsiderSlowAtMS);
 		FormattedString += FString::Printf(TEXT(", PromptIfMissing=%s"), BoolAlpha(bPromptIfMissing));
 #endif // ENGINE_MINOR_VERSION >= 26

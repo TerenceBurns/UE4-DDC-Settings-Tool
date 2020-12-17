@@ -6,9 +6,9 @@
 #include "Widgets/DeclarativeSyntaxSupport.h"
 #include "Widgets/SWidget.h"
 #include "Widgets/SCompoundWidget.h"
-
-#include "DDCInfo.h"
 #include "Widgets/Input/SComboBox.h"
+#include "DDCInfo.h"
+
 
 /**
  * Slate widget to allow users to edit which Plugins are enabled for this project.

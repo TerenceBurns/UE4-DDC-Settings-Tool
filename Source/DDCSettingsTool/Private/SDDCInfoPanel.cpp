@@ -5,20 +5,10 @@
 
 #define LOCTEXT_NAMESPACE "FDDCSettingsToolModule"
 
-/**
- * Constants for this tool.
- */
-namespace DDCInfoPanelViewConstants
-{
-
-}
-
 
 ///////////////////////////////////////////////////////////////////////
 // SDDCInfoPanel
 
-
-#pragma optimize("", off)
 
 void SDDCInfoPanel::Construct(const FArguments& InArgs, const FName& InCacheName, TWeakObjectPtr<UDDCInfo> InCacheInformation)
 {
@@ -67,7 +57,6 @@ void SDDCInfoPanel::Construct(const FArguments& InArgs, const FName& InCacheName
 	[
 		SNew(SBorder)
 		.BorderImage(FEditorStyle::GetBrush("ToolPanel.GroupBorder"))
-		//.Padding(FMargin(0.0f, 0.0f, 2.0f, 0.0f))
 		[
 			SNew(SBorder)
 			.BorderImage(FEditorStyle::GetBrush("MessageLog.ListBorder"))
@@ -78,7 +67,6 @@ void SDDCInfoPanel::Construct(const FArguments& InArgs, const FName& InCacheName
 				+ SVerticalBox::Slot()
 				.HAlign(EHorizontalAlignment::HAlign_Center)
 				.AutoHeight()
-				//.Padding(2.0f, 0.0f)
 				[
 					SNew(STextBlock)
 					.Font(FDDCSettingsToolStyle::Get().GetFontStyle("DDCEditor.LabelFont"))
@@ -94,6 +82,5 @@ void SDDCInfoPanel::Construct(const FArguments& InArgs, const FName& InCacheName
 	];
 }
 
-#pragma optimize("", on)
 
 #undef LOCTEXT_NAMESPACE
