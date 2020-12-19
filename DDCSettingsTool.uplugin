@@ -8,7 +8,7 @@
 	"CreatedBy": "Trifolium Digital Limited",
 	"CreatedByURL": "http://www.trifoliumdigital.co.uk",
 	"DocsURL": "",
-	"MarketplaceURL": "",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/01be128351384bceb0b4b9d70a73b9bc",
 	"SupportURL": "",
 	"EngineVersion": "4.26.0",
 	"CanContainContent": false,
@@ -21,8 +21,7 @@
 			"Type": "EditorNoCommandlet",
 			"LoadingPhase": "PostEngineInit",
 			"WhitelistPlatforms": [
-				"Win64",
-				"Mac"
+				"Win64"
 			]
 		}
 	]
