@@ -1,7 +1,18 @@
 
 # DDC Settings Tool
 
-This tool allows developers to configure the Local DDC Settings, and the Shared DDC Settings, for their UE4 project.
+This tool allows developers to configure the Local DDC Settings and the Shared DDC Settings for their UE4 project.
+
+## Other sources
+
+You can get the packaged build for 4.24, 4.25 or 4.26 from the Unreal Engine Marketplace:
+https://www.unrealengine.com/marketplace/en-US/profile/TrifoliumDigital
+
+## Contact
+
+Follow me on Twitter:
+https://twitter.com/TriDigLtd
+https://twitter.com/terry_burns85
 
 ## How does it work?
 
@@ -30,7 +41,6 @@ These locations are:
 
  - Each property has a tooltip. The text for each has been taken straight from the DDC Backend code.
  - The editor is for the currently used DDC only. A DDC selector may become available in future.
-
 
 ## Further Reading
 
