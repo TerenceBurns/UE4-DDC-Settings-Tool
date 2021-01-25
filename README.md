@@ -6,12 +6,15 @@ This tool allows developers to configure the Local DDC Settings and the Shared D
 ## Other sources
 
 You can get the packaged build for 4.24, 4.25 or 4.26 from the Unreal Engine Marketplace:
+
 https://www.unrealengine.com/marketplace/en-US/profile/TrifoliumDigital
 
 ## Contact
 
 Follow me on Twitter:
+
 https://twitter.com/TriDigLtd
+
 https://twitter.com/terry_burns85
 
 ## How does it work?
